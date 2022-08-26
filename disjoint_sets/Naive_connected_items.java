@@ -3,6 +3,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+
 /** Using set to implement connected items. **/
 public class Naive_connected_items<T> {
     private Set<Set<T>> items;
@@ -13,8 +14,18 @@ public class Naive_connected_items<T> {
 
     /** Put each new item into a set which is isolated from other sets */
     public void add_item(T item) {
-        Set<T> new_item = Set.of(item);
-        items.add(new_item);
+        Iterator<Set<T>> iter = items.iterator();
+        boolean existed = false;
+        while (iter.hasNext()) {  // check if each set contains the item already
+            Set<T> item_being_checked = iter.next();
+            if (item_being_checked.contains(item)) {
+                existed = true;
+            }
+        }
+        if (!existed) {
+            Set<T> new_item = Set.of(item);
+            items.add(new_item);
+        }
     }
 
     /** Combine two sets to implement connection. */
@@ -46,10 +57,13 @@ public class Naive_connected_items<T> {
             items.remove(target_b);
             target_b.add(a);
             items.add(target_b);
-        } else if (exist_a && exist_b && target_a.equals(target_b)) { //item a and b in the different set in the collection
+        } else if (exist_a && exist_b && !target_a.equals(target_b)) { //item a and b in the different set in the collection
+            items.remove(target_a);
             items.remove(target_b);
-            target_a.addAll(target_b);
-            items.add(target_a);
+            Set<T> new_item = new HashSet<>();
+            new_item.addAll(target_a);
+            new_item.addAll(target_b);
+            items.add(new_item);
         }
     }
 

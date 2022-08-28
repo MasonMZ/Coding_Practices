@@ -4,8 +4,9 @@ import java.util.Iterator;
 import java.util.Set;
 
 
-/** Using set to implement connected items. **/
-public class Naive_connected_items<T> {
+/** Using set to implement connected items.
+ * Requires iterating through all the sets to find anything. Complicated and slow!**/
+public class Naive_connected_items<T> implements DisjointSets<T>{
     private Set<Set<T>> items;
 
     public Naive_connected_items() {
@@ -29,6 +30,7 @@ public class Naive_connected_items<T> {
     }
 
     /** Combine two sets to implement connection. */
+    @Override
     public void connect(T a, T b) {
         boolean exist_a = false;
         boolean exist_b = false;
@@ -67,6 +69,7 @@ public class Naive_connected_items<T> {
         }
     }
 
+    @Override
     public boolean isConnected(T a, T b) {
         boolean result = false;
         Iterator<Set<T>> iter = items.iterator();

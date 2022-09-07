@@ -8,7 +8,7 @@ public class EnglishToInt {
         } else {
             int res = 0;
             for (int i = 0; i < s.length(); i += 1) {
-                res += char_to_num(s.charAt(i)) * 26 ^ i;
+                res += char_to_num(s.charAt(i)) * Math.pow(27,  (s.length() - i - 1));
             }
             return res;
         }

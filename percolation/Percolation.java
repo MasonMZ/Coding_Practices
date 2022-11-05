@@ -25,7 +25,7 @@ public class Percolation {
          *  and two virtual tiles, one of which is at the top of the first row (top row),
          *  the other one is below the last row (bottom tiles).**/
         gridsWithVirtualTiles = new WeightedQuickUnionUF(n * n + 2);
-        grids = new WeightedQuickUnionUF(n * n);
+        grids = new WeightedQuickUnionUF(n * n + 1);
         virtualTopTileID = n * n;
         virtualBottomTileID = n * n + 1;
         status = new boolean[n * n];
@@ -78,6 +78,7 @@ public class Percolation {
             /* If opening a grid in the top row, connect it to the virtual top tile. **/
             if (row == 1) {
                 gridsWithVirtualTiles.union(id, virtualTopTileID);
+                grids.union(id, virtualTopTileID);
             }
             /* If opening a grid in the bottom row, connect it to the virtual bottom tile if not percolates. **/
             if (row == size1D) {
@@ -104,12 +105,7 @@ public class Percolation {
             return false;
         }
         else {
-            for (int i = 1; i <= size1D; i += 1) {
-                if (grids.find(coordinateToID(row, col)) == grids.find(coordinateToID(1, i))) {
-                    return true;
-                }
-            }
-            return false;
+            return (grids.find(coordinateToID(row, col)) == grids.find(virtualTopTileID));
         }
     }
 
@@ -178,5 +174,28 @@ public class Percolation {
         // P6.open(3, 3);
         // P6.open(3, 1);
         // System.out.println(P6.isFull(3, 1));
+
+        /* Test case 6: isFull method test. Result should be false. **/
+        Percolation P7 = new Percolation(6);
+        P7.open(1, 6);
+        P7.open(2, 6);
+        P7.open(3, 6);
+        P7.open(4, 6);
+        P7.open(5, 6);
+        P7.open(5, 5);
+        P7.open(4, 4);
+        P7.open(3, 4);
+        P7.open(2, 4);
+        P7.open(2, 3);
+        P7.open(2, 2);
+        P7.open(2, 1);
+        P7.open(3, 1);
+        P7.open(4, 1);
+        P7.open(5, 1);
+        P7.open(5, 2);
+        P7.open(6, 2);
+        P7.open(5, 4);
+        System.out.println();
+        System.out.println(P7.isFull(2, 1));
     }
 }

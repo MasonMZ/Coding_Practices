@@ -121,61 +121,61 @@ public class Percolation {
     }
 
     public static void main(String[] args) {
-        // /* Test case 1: should print out false at first then true. **/
-        // Percolation P1 = new Percolation(5);
-        // System.out.println(P1.percolates());
-        // int c1 = P1.size1D / 2;
-        // for (int r = 1; r <= P1.size1D; r += 1) {
-        //     P1.open(r, c1);
-        // }
-        // System.out.println(P1.percolates());
-        //
-        // /* Test case 2: should print out false. **/
-        // Percolation P2 = new Percolation(10);
-        // int c2 = P2.size1D / 2;
-        // for (int r = 1; r <= P2.size1D; r += 2) {
-        //     P2.open(r, c2);
-        // }
-        // System.out.println(P2.percolates());
-        //
-        // /* Test case 3: should print out false. **/
-        // Percolation P3 = new Percolation(5);
-        // int r3 = P3.size1D / 2;
-        // for (int c = 1; c <= P3.size1D; c += 1) {
-        //     P3.open(r3, c);
-        // }
-        // System.out.println(P3.percolates());
-        //
-        // /* Test case 4: should print out false. **/
-        // Percolation P4 = new Percolation(5);
-        // int c = 1;
-        // for (int row = 1; row <= P4.size1D; row += 1) {
-        //     P4.open(row, c);
-        //     c += 1;
-        // }
-        // System.out.println(P4.percolates());
-        //
-        // /* Test case 4: should print out true. **/
-        // Percolation P5 = new Percolation(10);
-        // int col = 1;
-        // for (int row = 1; row <= P5.size1D; row += 1) {
-        //     P5.open(row, col);
-        //     if (col > 1) {
-        //         P5.open(row, col - 1);
-        //     }
-        //     col += 1;
-        // }
-        // System.out.println(P5.percolates());
-        //
-        // /* Test case 5: isFull method test. Result should be false. **/
-        // Percolation P6 = new Percolation(3);
-        // P6.open(1, 3);
-        // P6.open(2, 3);
-        // P6.open(3, 3);
-        // P6.open(3, 1);
-        // System.out.println(P6.isFull(3, 1));
+        /* Test case 1: should print out false at first then true. **/
+        Percolation P1 = new Percolation(5);
+        System.out.println(P1.percolates());
+        int c1 = P1.size1D / 2;
+        for (int r = 1; r <= P1.size1D; r += 1) {
+            P1.open(r, c1);
+        }
+        System.out.println(P1.percolates());
 
-        /* Test case 6: isFull method test. Result should be false. **/
+        /* Test case 2: should print out false. **/
+        Percolation P2 = new Percolation(10);
+        int c2 = P2.size1D / 2;
+        for (int r = 1; r <= P2.size1D; r += 2) {
+            P2.open(r, c2);
+        }
+        System.out.println(P2.percolates());
+
+        /* Test case 3: should print out false. **/
+        Percolation P3 = new Percolation(5);
+        int r3 = P3.size1D / 2;
+        for (int c = 1; c <= P3.size1D; c += 1) {
+            P3.open(r3, c);
+        }
+        System.out.println(P3.percolates());
+
+        /* Test case 4: should print out false. **/
+        Percolation P4 = new Percolation(5);
+        int c = 1;
+        for (int row = 1; row <= P4.size1D; row += 1) {
+            P4.open(row, c);
+            c += 1;
+        }
+        System.out.println(P4.percolates());
+
+        /* Test case 4: should print out true. **/
+        Percolation P5 = new Percolation(10);
+        int col = 1;
+        for (int row = 1; row <= P5.size1D; row += 1) {
+            P5.open(row, col);
+            if (col > 1) {
+                P5.open(row, col - 1);
+            }
+            col += 1;
+        }
+        System.out.println(P5.percolates());
+
+        /* Test case 5: isFull method test. Result should be false. **/
+        Percolation P6 = new Percolation(3);
+        P6.open(1, 3);
+        P6.open(2, 3);
+        P6.open(3, 3);
+        P6.open(3, 1);
+        System.out.println(P6.isFull(3, 1));
+
+        /* Test case 6: isFull method test. Result should be true. **/
         Percolation P7 = new Percolation(6);
         P7.open(1, 6);
         P7.open(2, 6);

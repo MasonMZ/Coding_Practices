@@ -6,6 +6,7 @@
 
 import edu.princeton.cs.algs4.StdRandom;
 
+import java.util.Iterator;
 import java.util.NoSuchElementException;
 
 public class RandomizedQueue<Item> implements Iterable<Item> {
@@ -71,10 +72,69 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
 
     // return a random item (but do not remove it)
-    public Item sample()
+    public Item sample() {
+        if (size == 0) {
+            throw new NoSuchElementException("Nothing to remove in the deque!");
+        }
+        int targetID = StdRandom.uniformInt(size);
+        Item targetItem = itemArray[targetID];
+        return targetItem;
+    }
+
+    // return an independent iterator over items in random order
+    public Iterator<Item> iterator() {
+        return new RdQueueIterator();
+    }
+
+    private class RdQueueIterator implements Iterator<Item> {
+        public int itemNum = size;
+
+        public boolean hasNext() {
+            return (itemNum > 0);
+        }
+
+        public Item next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException("No more items!");
+            }
+            int targetID = StdRandom.uniformInt(itemNum);
+            Item targetItem = itemArray[targetID];
+            itemArray[targetID] = itemArray[itemNum - 1];
+            itemArray[itemNum - 1] = targetItem;
+            itemNum -= 1;
+            return targetItem;
+        }
+
+        public void remove() {
+            throw new UnsupportedOperationException();
+        }
+
+    }
 
 
     public static void main(String[] args) {
-
+        RandomizedQueue<String> rd1 = new RandomizedQueue<>();
+        System.out.println(rd1.isEmpty());
+        rd1.enqueue("front");
+        System.out.println(rd1.isEmpty());
+        System.out.println(rd1.size());
+        rd1.enqueue("middle");
+        System.out.println(rd1.size());
+        rd1.enqueue("back");
+        System.out.println(rd1.size());
+        rd1.enqueue("tail");
+        rd1.enqueue("head");
+        rd1.enqueue("extra");
+        rd1.enqueue("extra1");
+        rd1.enqueue("extra2");
+        System.out.println(rd1.size());
+        System.out.println(rd1.dequeue());
+        System.out.println(rd1.size());
+        System.out.println(rd1.sample());
+        System.out.println(rd1.size());
+        System.out.println();
+        for (String i : rd1) {
+            System.out.println(i);
+        }
     }
 }

@@ -125,6 +125,13 @@ public class Point implements Comparable<Point> {
         }
 
         public int compare(Point a, Point b) {
+            if (a == null || b == null) {
+                throw new IllegalArgumentException("The point should NOT be null!");
+            }
+            if (a.slopeTo(b) == Double.NEGATIVE_INFINITY) {
+                throw new IllegalArgumentException(
+                        "Do NOT compare two identical points!");
+            }
             if (referencePoint.slopeTo(a) < referencePoint.slopeTo(b)) {
                 return -1;
             }

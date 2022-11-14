@@ -5,14 +5,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../CollinearPoints/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CollinearPoints/Algorithms, Part I.iml" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/Algorithms, Part I.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CollinearPoints/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/Point.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../queues/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../queues/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../queues/Deque.java" beforeDir="false" afterPath="$PROJECT_DIR$/../queues/Deque.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../queues/RandomizedQueue$1.class" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../queues/RandomizedQueue$RdQueueIterator.class" beforeDir="false" afterPath="$PROJECT_DIR$/../queues/RandomizedQueue$RdQueueIterator.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../queues/RandomizedQueue.class" beforeDir="false" afterPath="$PROJECT_DIR$/../queues/RandomizedQueue.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../queues/RandomizedQueue.java" beforeDir="false" afterPath="$PROJECT_DIR$/../queues/RandomizedQueue.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../queues/queues.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../queues/queues.zip" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

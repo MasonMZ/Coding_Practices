@@ -126,7 +126,7 @@ public class Point implements Comparable<Point> {
 
         public int compare(Point a, Point b) {
             if (a == null || b == null) {
-                throw new IllegalArgumentException("The point should NOT be null!");
+                throw new NullPointerException("The point should NOT be null!");
             }
             if (referencePoint == null) {
                 throw new NullPointerException("The point should NOT be null!");

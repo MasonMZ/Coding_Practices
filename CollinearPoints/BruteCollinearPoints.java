@@ -5,11 +5,18 @@
  **************************************************************************** */
 
 public class BruteCollinearPoints {
-    private LineSegment[] lineSegList = new LineSegment[8];
+    private LineSegment[] lineSegList;
     private int segmentNumber = 0;
 
     // finds all line segments containing 4 points
     public BruteCollinearPoints(Point[] points) {
+        lineSegList = new LineSegment[points.length / 2];
+        // if (points.length < 4) {
+        //     throw new IllegalArgumentException("The number of points should be larger than 4!");
+        // }
+        if (points == null) {
+            throw new IllegalArgumentException("The input points should NOT be null!");
+        }
         for (int i = 0; i < points.length; i += 1) {
             if (points[i] == null) {
                 throw new IllegalArgumentException("The point should NOT be null!");
@@ -46,9 +53,6 @@ public class BruteCollinearPoints {
                                 lineSegList[segmentNumber] = lsGenerator(points[i], points[j],
                                                                          points[p], points[q]);
                                 segmentNumber += 1;
-                                if (segmentNumber == lineSegList.length) {
-                                    resize(lineSegList);
-                                }
                             }
                         }
                     }
@@ -74,11 +78,6 @@ public class BruteCollinearPoints {
         return new LineSegment(max, min);
     }
 
-    private void resize(LineSegment[] a) {
-        LineSegment[] newLineSegs = new LineSegment[lineSegList.length * 2];
-        System.arraycopy(lineSegList, 0, newLineSegs, 0, lineSegList.length);
-        lineSegList = newLineSegs;
-    }
 
     // the number of line segments
     public int numberOfSegments() {
@@ -86,7 +85,9 @@ public class BruteCollinearPoints {
     }
 
     public LineSegment[] segments() {
-        return lineSegList;
+        LineSegment[] result = new LineSegment[segmentNumber];
+        System.arraycopy(lineSegList, 0, result, 0, segmentNumber);
+        return result;
     }
 
     public static void main(String[] args) {

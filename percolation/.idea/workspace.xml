@@ -6,9 +6,13 @@
   <component name="ChangeListManager">
     <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../CollinearPoints/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CollinearPoints/BruteCollinearPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/BruteCollinearPoints.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CollinearPoints/BruteCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/BruteCollinearPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CollinearPoints/FastCollinearPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/FastCollinearPoints.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CollinearPoints/FastCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/FastCollinearPoints.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CollinearPoints/Point$BySlope.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/Point$BySlope.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../CollinearPoints/Point.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/Point.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../CollinearPoints/Point.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/Point.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../queues/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../queues/.idea/workspace.xml" afterDir="false" />
     </list>

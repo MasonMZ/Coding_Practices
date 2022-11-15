@@ -5,7 +5,7 @@
  **************************************************************************** */
 
 public class BruteCollinearPoints {
-    private LineSegment[] lineSegList = new LineSegment[] { };
+    private LineSegment[] lineSegList = new LineSegment[8];
     private int segmentNumber = 0;
 
     // finds all line segments containing 4 points
@@ -46,6 +46,9 @@ public class BruteCollinearPoints {
                                 lineSegList[segmentNumber] = lsGenerator(points[i], points[j],
                                                                          points[p], points[q]);
                                 segmentNumber += 1;
+                                if (segmentNumber == lineSegList.length) {
+                                    resize(lineSegList);
+                                }
                             }
                         }
                     }
@@ -53,7 +56,6 @@ public class BruteCollinearPoints {
             }
 
         }
-
     }
 
     // generate a line segment containing 4 collinear points
@@ -72,6 +74,12 @@ public class BruteCollinearPoints {
         return new LineSegment(max, min);
     }
 
+    private void resize(LineSegment[] a) {
+        LineSegment[] newLineSegs = new LineSegment[lineSegList.length * 2];
+        System.arraycopy(lineSegList, 0, newLineSegs, 0, lineSegList.length);
+        lineSegList = newLineSegs;
+    }
+
     // the number of line segments
     public int numberOfSegments() {
         return segmentNumber;
@@ -82,6 +90,17 @@ public class BruteCollinearPoints {
     }
 
     public static void main(String[] args) {
+        // Point p1 = new Point(10000, 0);
+        // Point p2 = new Point(0, 10000);
+        // Point p3 = new Point(3000, 7000);
+        // Point p4 = new Point(7000, 3000);
+        // Point p5 = new Point(20000, 21000);
+        // Point p6 = new Point(3000, 4000);
+        // Point p7 = new Point(14000, 15000);
+        // Point p8 = new Point(6000, 7000);
+        // Point[] inputPoints = new Point[] { p1, p2, p3, p4, p5, p6, p7, p8 };
+        // BruteCollinearPoints collinear = new BruteCollinearPoints(inputPoints);
+
 
     }
 }

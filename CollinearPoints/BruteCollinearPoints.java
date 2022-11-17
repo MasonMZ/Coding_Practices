@@ -10,13 +10,13 @@ public class BruteCollinearPoints {
 
     // finds all line segments containing 4 points
     public BruteCollinearPoints(Point[] points) {
-        lineSegList = new LineSegment[points.length / 2];
+        lineSegList = new LineSegment[points.length];
         // if (points.length < 4) {
         //     throw new IllegalArgumentException("The number of points should be larger than 4!");
         // }
-        if (points == null) {
-            throw new IllegalArgumentException("The input points should NOT be null!");
-        }
+        // if (points == null) {
+        //     throw new IllegalArgumentException("The input points should NOT be null!");
+        // }
         for (int i = 0; i < points.length; i += 1) {
             if (points[i] == null) {
                 throw new IllegalArgumentException("The point should NOT be null!");

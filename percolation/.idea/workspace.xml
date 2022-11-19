@@ -6,13 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../CollinearPoints/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CollinearPoints/BruteCollinearPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/BruteCollinearPoints.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CollinearPoints/BruteCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/BruteCollinearPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CollinearPoints/FastCollinearPoints.class" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/FastCollinearPoints.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CollinearPoints/FastCollinearPoints.java" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/FastCollinearPoints.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../CollinearPoints/Point.zip" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/Point.zip" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../queues/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../queues/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../puzzle8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../puzzle8/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../puzzle8/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/../puzzle8/Board.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../puzzle8/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/../puzzle8/Board.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../puzzle8/PuzzleChecker.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,13 +92,13 @@
     <option name="showModules" value="false" />
     <option name="sortByType" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "E:/Coding_Practices/Coding_Practices/percolation"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Coding_Practices/Coding_Practices/percolation&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Percolation">
     <configuration name="Percolation" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Percolation" />

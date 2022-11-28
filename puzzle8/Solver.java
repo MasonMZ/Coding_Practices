@@ -8,7 +8,6 @@ import edu.princeton.cs.algs4.MinPQ;
 import edu.princeton.cs.algs4.Stack;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 
 
 public class Solver {
@@ -18,25 +17,29 @@ public class Solver {
     private class SearchNode implements Comparable<SearchNode> {
         private int preMoves;
         private int hammingNum;
+        private int manhattanNum;
         private SearchNode prevNode;
         private Board currBoard;
 
         private SearchNode(Board b, int moves) {
             preMoves = moves;
             currBoard = b;
-            hammingNum = b.hamming();
+            // hammingNum = b.hamming();
+            manhattanNum = b.manhattan();
             prevNode = null;
         }
 
         private SearchNode(Board b, SearchNode s) {
             preMoves = s.preMoves + 1;
             currBoard = b;
-            hammingNum = b.hamming();
+            // hammingNum = b.hamming();
+            manhattanNum = b.manhattan();
             prevNode = s;
         }
 
         public int compareTo(SearchNode s) {
-            return ((hammingNum + preMoves) - (s.hammingNum + s.preMoves));
+            // return ((hammingNum + preMoves) - (s.hammingNum + s.preMoves));
+            return ((manhattanNum + preMoves) - (s.manhattanNum + s.preMoves));
         }
 
 
@@ -48,11 +51,18 @@ public class Solver {
             throw new IllegalArgumentException("Initial board can NOT be null.");
         }
         SearchNode prevNode;
-        HashSet<Board> visitedBoards = new HashSet<>();
+        ArrayList<Board> visitedBoards = new ArrayList<>();
         int preMoves = 0;
         SearchNode curNode = new SearchNode(initial, preMoves);
         MinPQ<SearchNode> priorityQueue = new MinPQ<>();
         priorityQueue.insert(curNode);
+        visitedBoards.add(initial);
+        MinPQ<Integer> pqSteps = new MinPQ<>();
+        if (initial.isGoal()) {
+            pqSteps.insert(0);
+            solutionList.add(recordSolution(curNode));
+            solutionNum += 1;
+        }
         while (!priorityQueue.isEmpty()) {
             prevNode = priorityQueue.delMin();
             Iterable<Board> nextBoardCandidate = prevNode.currBoard.neighbors();
@@ -64,8 +74,19 @@ public class Solver {
                 priorityQueue.insert(node);
                 visitedBoards.add(b);
                 if (b.isGoal()) {
+                    pqSteps.insert(prevNode.preMoves + 1);
                     solutionList.add(recordSolution(node));
                     solutionNum += 1;
+                }
+            }
+            if (solutionNum >= 1 && (prevNode.preMoves > pqSteps.min())) {
+                break;
+            }
+            if (solutionNum == 0 && ((prevNode.preMoves + prevNode.manhattanNum) > (
+                    prevNode.prevNode.preMoves + prevNode.prevNode.manhattanNum))) {
+                Solver altSolver = new Solver(initial.twin());
+                if (altSolver.isSolvable()) {
+                    break;
                 }
             }
         }
@@ -115,6 +136,29 @@ public class Solver {
     }
 
     public static void main(String[] args) {
+        // int[][] data1 = new int[][] {
+        //         { 1, 2, 3, 4 }, { 5, 6, 7, 8 }, { 9, 10, 11, 12 }, { 13, 14, 0, 15 }
+        // };
+        // Board b1 = new Board(data1);
+        // Solver s1 = new Solver(b1);
+        // System.out.println(b1);
+        // for (Board b : s1.solution()) {
+        //     System.out.println();
+        //     System.out.println(b);
+        //     System.out.println();
+        // }
+
+        int[][] data1 = new int[][] {
+                { 1, 6, 2 }, { 4, 8, 0 }, { 7, 3, 5 }
+        };
+        Board b1 = new Board(data1);
+        Solver s1 = new Solver(b1);
+        for (Board b : s1.solution()) {
+            System.out.println();
+            System.out.println(b);
+            System.out.println();
+        }
+
 
     }
 }

@@ -11,6 +11,7 @@ import java.util.Arrays;
 public final class Board {
     private final int size;
     private final int[][] squares;
+    private Board twin;
 
     // create a board from an n-by-n array of tiles,
     // where tiles[row][col] = tile at (row, col)
@@ -26,16 +27,25 @@ public final class Board {
 
     // string representation of this board
     public String toString() {
-        String res = String.format("%d", size);
-        for (int i = 0; i < size; i += 1) {
-            String newLine = "";
-            for (int j = 0; j < size; j += 1) {
-                newLine = String.format(newLine + "%2d", squares[i][j]);
+        // String res = String.format("%d", size);
+        // for (int i = 0; i < size; i += 1) {
+        //     String newLine = "";
+        //     for (int j = 0; j < size; j += 1) {
+        //         newLine = String.format(newLine + "%2d", squares[i][j]);
+        //     }
+        //     res = String.format(res + "%n" + newLine);
+        // }
+        // res = String.format(res + "%n");
+        // return res;
+        StringBuilder s = new StringBuilder();
+        s.append(size + "\n");
+        for (int i = 0; i < size; i++) {
+            for (int j = 0; j < size; j++) {
+                s.append(String.format("%2d ", squares[i][j]));
             }
-            res = String.format(res + "%n" + newLine);
+            s.append("\n");
         }
-        res = String.format(res + "%n");
-        return res;
+        return s.toString();
     }
 
     // board dimension n
@@ -103,67 +113,72 @@ public final class Board {
         if (isUpperLeftCorner()) {
             return upperLeftNeighbors();
         }
-        if (isUpperRightCorner()) {
+        else if (isUpperRightCorner()) {
             return upperRightNeighbors();
         }
-        if (isLowerLeftCorner()) {
+        else if (isLowerLeftCorner()) {
             return lowerLeftNeighbors();
         }
-        if (isLowerRightCorner()) {
+        else if (isLowerRightCorner()) {
             return lowerRightNeighbors();
         }
-        if (isUpperSide()) {
+        else if (isUpperSide()) {
             return upperSideNeighbors();
         }
-        if (isLowerSide()) {
+        else if (isLowerSide()) {
             return lowerSideNeighbors();
         }
-        if (isLeftSide()) {
+        else if (isLeftSide()) {
             return leftSideNeighbors();
         }
-        if (isRightSide()) {
+        else if (isRightSide()) {
             return rightSideNeighbors();
         }
-        return innerNeighbors();
+        else {
+            return innerNeighbors();
+        }
     }
 
     // a board that is obtained by exchanging any pair of tiles
     public Board twin() {
-        int n1 = StdRandom.uniformInt(size * size);
-        int row1 = n1 / size;
-        int col1 = n1 % size;
-        while (squares[row1][col1] == 0) {
-            n1 = StdRandom.uniformInt(size * size);
-            row1 = n1 / size;
-            col1 = n1 % size;
-        }
-        int n2 = StdRandom.uniformInt(size * size);
-        int row2 = n2 / size;
-        int col2 = n2 % size;
-        while (n1 == n2 || squares[row2][col2] == 0) {
-            n2 = StdRandom.uniformInt(size * size);
-            row2 = n2 / size;
-            col2 = n2 % size;
-        }
-        int[][] newTiles = new int[size][size];
-        for (int i = 0; i < size; i += 1) {
-            for (int j = 0; j < size; j += 1) {
-                if (i == row1 && j == col1) {
-                    newTiles[i][j] = squares[row2][col2];
-                }
-                else if (i == row2 && j == col2) {
-                    newTiles[i][j] = squares[row1][col1];
-                }
-                else {
-                    newTiles[i][j] = squares[i][j];
+        if (twin == null) {
+            int n1 = StdRandom.uniformInt(size * size);
+            int row1 = n1 / size;
+            int col1 = n1 % size;
+            while (squares[row1][col1] == 0) {
+                n1 = StdRandom.uniformInt(size * size);
+                row1 = n1 / size;
+                col1 = n1 % size;
+            }
+            int n2 = StdRandom.uniformInt(size * size);
+            int row2 = n2 / size;
+            int col2 = n2 % size;
+            while (n1 == n2 || squares[row2][col2] == 0) {
+                n2 = StdRandom.uniformInt(size * size);
+                row2 = n2 / size;
+                col2 = n2 % size;
+            }
+            int[][] newTiles = new int[size][size];
+            for (int i = 0; i < size; i += 1) {
+                for (int j = 0; j < size; j += 1) {
+                    if (i == row1 && j == col1) {
+                        newTiles[i][j] = squares[row2][col2];
+                    }
+                    else if (i == row2 && j == col2) {
+                        newTiles[i][j] = squares[row1][col1];
+                    }
+                    else {
+                        newTiles[i][j] = squares[i][j];
+                    }
                 }
             }
+            Board res = new Board(newTiles);
+            twin = res;
         }
-        Board res = new Board(newTiles);
-        return res;
+        return twin;
     }
 
-    private Boolean isUpperLeftCorner() {
+    private boolean isUpperLeftCorner() {
         return (this.squares[0][0] == 0);
     }
 
@@ -186,7 +201,7 @@ public final class Board {
         return Arrays.asList(neighbors);
     }
 
-    private Boolean isUpperRightCorner() {
+    private boolean isUpperRightCorner() {
         return (this.squares[0][size - 1] == 0);
     }
 
@@ -209,7 +224,7 @@ public final class Board {
         return Arrays.asList(neighbors);
     }
 
-    private Boolean isLowerLeftCorner() {
+    private boolean isLowerLeftCorner() {
         return (this.squares[size - 1][0] == 0);
     }
 
@@ -232,7 +247,7 @@ public final class Board {
         return Arrays.asList(neighbors);
     }
 
-    private Boolean isLowerRightCorner() {
+    private boolean isLowerRightCorner() {
         return (this.squares[size - 1][size - 1] == 0);
     }
 
@@ -255,7 +270,7 @@ public final class Board {
         return Arrays.asList(neighbors);
     }
 
-    private Boolean isUpperSide() {
+    private boolean isUpperSide() {
         for (int i = 1; i < size - 1; i += 1) {
             if (this.squares[0][i] == 0) {
                 return true;
@@ -295,7 +310,7 @@ public final class Board {
         return Arrays.asList(neighbors);
     }
 
-    private Boolean isLowerSide() {
+    private boolean isLowerSide() {
         for (int i = 1; i < size - 1; i += 1) {
             if (this.squares[size - 1][i] == 0) {
                 return true;
@@ -335,7 +350,7 @@ public final class Board {
         return Arrays.asList(neighbors);
     }
 
-    private Boolean isLeftSide() {
+    private boolean isLeftSide() {
         for (int i = 1; i < size - 1; i += 1) {
             if (this.squares[i][0] == 0) {
                 return true;
@@ -375,7 +390,7 @@ public final class Board {
         return Arrays.asList(neighbors);
     }
 
-    private Boolean isRightSide() {
+    private boolean isRightSide() {
         for (int i = 1; i < size - 1; i += 1) {
             if (this.squares[i][size - 1] == 0) {
                 return true;
@@ -456,18 +471,18 @@ public final class Board {
         return Arrays.asList(neighbors);
     }
 
-    private Boolean isInnerTile() {
-        return (!(isSide() || isCorner()));
-    }
+    // private boolean isInnerTile() {
+    //     return (!(isSide() || isCorner()));
+    // }
 
-    private Boolean isCorner() {
-        return (isLowerLeftCorner() || isLowerRightCorner() || isUpperLeftCorner()
-                || isUpperRightCorner());
-    }
-
-    private Boolean isSide() {
-        return (isUpperSide() || isLowerSide() || isLeftSide() || isRightSide());
-    }
+    // private boolean isCorner() {
+    //     return (isLowerLeftCorner() || isLowerRightCorner() || isUpperLeftCorner()
+    //             || isUpperRightCorner());
+    // }
+    //
+    // private boolean isSide() {
+    //     return (isUpperSide() || isLowerSide() || isLeftSide() || isRightSide());
+    // }
 
 
     public static void main(String[] args) {
@@ -484,5 +499,15 @@ public final class Board {
         // System.out.println(B2.hamming());
         // System.out.println(B2.manhattan());
         // System.out.println(B2.twin());
+
+        int[][] data3 = new int[][] {
+                { 2, 0, 3, 4 }, { 1, 10, 6, 8 }, { 5, 9, 7, 12 }, { 13, 14, 11, 15 }
+        };
+        Board B3 = new Board(data3);
+        for (Board b : B3.neighbors()) {
+            System.out.println(b);
+        }
+
+
     }
 }

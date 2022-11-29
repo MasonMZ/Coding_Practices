@@ -14,9 +14,10 @@ public class Solver {
     private int solutionNum = 0;
     private ArrayList<ArrayList<Board>> solutionList = new ArrayList<ArrayList<Board>>();
 
+
     private class SearchNode implements Comparable<SearchNode> {
         private int preMoves;
-        private int hammingNum;
+        // private int hammingNum;
         private int manhattanNum;
         private SearchNode prevNode;
         private Board currBoard;
@@ -50,22 +51,42 @@ public class Solver {
         if (initial == null) {
             throw new IllegalArgumentException("Initial board can NOT be null.");
         }
+
         SearchNode prevNode;
         ArrayList<Board> visitedBoards = new ArrayList<>();
         int preMoves = 0;
         SearchNode curNode = new SearchNode(initial, preMoves);
+
+        SearchNode twinPreNode;
+        ArrayList<Board> twinVisitedBoards = new ArrayList<>();
+        Board twinInitial = initial.twin();
+        SearchNode twinCurNode = new SearchNode(twinInitial, preMoves);
+
         MinPQ<SearchNode> priorityQueue = new MinPQ<>();
         priorityQueue.insert(curNode);
         visitedBoards.add(initial);
+
+        MinPQ<SearchNode> twinPriorityQueue = new MinPQ<>();
+        twinPriorityQueue.insert(twinCurNode);
+        twinVisitedBoards.add(twinInitial);
+
         MinPQ<Integer> pqSteps = new MinPQ<>();
+
         if (initial.isGoal()) {
             pqSteps.insert(0);
             solutionList.add(recordSolution(curNode));
             solutionNum += 1;
         }
+
+        if (twinInitial.isGoal()) {
+            return;
+        }
+
         while (!priorityQueue.isEmpty()) {
             prevNode = priorityQueue.delMin();
+            twinPreNode = twinPriorityQueue.delMin();
             Iterable<Board> nextBoardCandidate = prevNode.currBoard.neighbors();
+            Iterable<Board> twinNextBoardCandidate = twinPreNode.currBoard.neighbors();
             for (Board b : nextBoardCandidate) {
                 if (visitedBoards.contains(b)) {
                     continue;
@@ -79,17 +100,38 @@ public class Solver {
                     solutionNum += 1;
                 }
             }
+            for (Board b : twinNextBoardCandidate) {
+                if (twinVisitedBoards.contains(b)) {
+                    continue;
+                }
+                SearchNode node = new SearchNode(b, twinPreNode);
+                twinPriorityQueue.insert(node);
+                twinVisitedBoards.add(b);
+                if (b.isGoal()) {
+                    return;
+                }
+            }
+            
             if (solutionNum >= 1 && (prevNode.preMoves > pqSteps.min())) {
                 break;
             }
-            if (solutionNum == 0 && ((prevNode.preMoves + prevNode.manhattanNum) > (
-                    prevNode.prevNode.preMoves + prevNode.prevNode.manhattanNum))) {
-                Solver altSolver = new Solver(initial.twin());
-                if (altSolver.isSolvable()) {
-                    break;
-                }
-            }
+            // if (solutionNum == 0 && count > lockStepNum) {
+            //     Solver altSolver = new Solver(prevNode.currBoard.twin());
+            //     if (altSolver.isSolvable()) {
+            //         break;
+            //     }
+            // }
+
+            // if (solutionNum == 0 && (
+            //         priorityQueue.min().manhattanNum > prevNode.manhattanNum)) {
+            //     Solver altSolver = new Solver(prevNode.currBoard.twin());
+            //     if (altSolver.isSolvable()) {
+            //         break;
+            //     }
+            // }
         }
+
+
     }
 
     // is the initial board solvable?
@@ -149,7 +191,7 @@ public class Solver {
         // }
 
         int[][] data1 = new int[][] {
-                { 1, 6, 2 }, { 4, 8, 0 }, { 7, 3, 5 }
+                { 5, 2, 3 }, { 4, 7, 0 }, { 8, 6, 1 }
         };
         Board b1 = new Board(data1);
         Solver s1 = new Solver(b1);

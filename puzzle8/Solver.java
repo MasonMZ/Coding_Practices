@@ -137,6 +137,9 @@ public class Solver {
 
     // sequence of boards in a shortest solution; null if unsolvable
     public Iterable<Board> solution() {
+        if (!isSolvable()) {
+            return null;
+        }
         return solutionList.get(0);
     }
 

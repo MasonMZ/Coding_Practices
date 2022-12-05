@@ -6,8 +6,10 @@
   <component name="ChangeListManager">
     <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KdTree$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/KdTree$Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/KdTree.class" beforeDir="false" afterPath="$PROJECT_DIR$/KdTree.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/KdTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/KdTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/PointSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/PointSET.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/PointSET.java" beforeDir="false" afterPath="$PROJECT_DIR$/PointSET.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../puzzle8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../puzzle8/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -90,14 +92,21 @@
     <option name="showModules" value="false" />
     <option name="sortByType" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "E:/Coding_Practices/Coding_Practices/kdtree"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Coding_Practices/Coding_Practices/kdtree&quot;
   }
-}]]></component>
-  <component name="RunManager">
+}</component>
+  <component name="RunManager" selected="Application.KdTree">
+    <configuration name="KdTree" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="KdTree" />
+      <module name="Algorithms, Part I" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="NearestNeighborVisualizer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="NearestNeighborVisualizer" />
       <module name="Algorithms, Part I" />
@@ -107,6 +116,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.KdTree" />
         <item itemvalue="Application.NearestNeighborVisualizer" />
       </list>
     </recent_temporary>
@@ -156,5 +166,12 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
     </layout>
+  </component>
+  <component name="XDebuggerManager">
+    <pin-to-top-manager>
+      <pinned-members>
+        <PinnedItemInfo parentTag="KdTree" memberName="root" />
+      </pinned-members>
+    </pin-to-top-manager>
   </component>
 </project>

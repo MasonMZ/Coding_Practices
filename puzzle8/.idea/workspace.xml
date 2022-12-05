@@ -7,6 +7,7 @@
     <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../kdtree/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../kdtree/KdTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/KdTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kdtree/PointSet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/PointSET.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />

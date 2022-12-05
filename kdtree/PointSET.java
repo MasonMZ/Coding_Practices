@@ -10,12 +10,12 @@ import edu.princeton.cs.algs4.StdDraw;
 
 import java.util.TreeSet;
 
-public class PointSet {
+public class PointSET {
 
     private TreeSet<Point2D> ptSet;
 
     /* construct an empty set of points **/
-    public PointSet() {
+    public PointSET() {
         ptSet = new TreeSet<>();
     }
 
@@ -50,6 +50,8 @@ public class PointSet {
 
     /* draw all points to standard draw  **/
     public void draw() {
+        StdDraw.setPenColor(StdDraw.BLACK);
+        StdDraw.setPenRadius(0.01);
         for (Point2D p : ptSet) {
             StdDraw.point(p.x(), p.y());
         }

@@ -51,7 +51,7 @@ public class PointSET {
     /* draw all points to standard draw  **/
     public void draw() {
         StdDraw.setPenColor(StdDraw.BLACK);
-        StdDraw.setPenRadius(0.01);
+        StdDraw.setPenRadius();
         for (Point2D p : ptSet) {
             StdDraw.point(p.x(), p.y());
         }
@@ -86,8 +86,8 @@ public class PointSET {
             if (p.equals(q)) {
                 continue;
             }
-            if (p.distanceTo(q) < minDistance) {
-                minDistance = p.distanceTo(q);
+            if (p.distanceSquaredTo(q) < minDistance) {
+                minDistance = p.distanceSquaredTo(q);
                 pointCandidate = q;
             }
         }

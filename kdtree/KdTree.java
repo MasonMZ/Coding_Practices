@@ -186,37 +186,14 @@ public class KdTree {
         }
         if (rect.contains(n.point) && !res.contains(n.point)) {
             res.add(n.point);
-            if (rect.intersects(n.left.box)) {
-                recRange(rect, n.left, res);
-            }
-            if (rect.intersects(n.right.box)) {
-                recRange(rect, n.right, res);
-            }
         }
-        // if (n.isKeyX) {
-        //     if (rect.xmax() < n.point.x()) {
-        //         recRange(rect, n.left, res);
-        //     }
-        //     else if (rect.xmin() > n.point.x()) {
-        //         recRange(rect, n.right, res);
-        //     }
-        //     else {
-        //         recRange(rect, n.left, res);
-        //         recRange(rect, n.right, res);
-        //     }
-        // }
-        // else {
-        //     if (rect.ymax() < n.point.y()) {
-        //         recRange(rect, n.left, res);
-        //     }
-        //     else if (rect.ymin() > n.point.y()) {
-        //         recRange(rect, n.right, res);
-        //     }
-        //     else {
-        //         recRange(rect, n.left, res);
-        //         recRange(rect, n.right, res);
-        //     }
-        // }
+        if (n.left != null && rect.intersects(n.left.box)) {
+            recRange(rect, n.left, res);
+        }
+        if (n.right != null && rect.intersects(n.right.box)) {
+            recRange(rect, n.right, res);
+        }
+
     }
 
     /* a nearest neighbor in the set to point p; null if the set is empty  **/

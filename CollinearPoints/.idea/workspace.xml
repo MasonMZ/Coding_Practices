@@ -5,12 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../percolation/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../puzzle8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../puzzle8/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../puzzle8/Board.class" beforeDir="false" afterPath="$PROJECT_DIR$/../puzzle8/Board.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../puzzle8/Board.java" beforeDir="false" afterPath="$PROJECT_DIR$/../puzzle8/Board.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../puzzle8/PuzzleChecker.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kdtree/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kdtree/KdTree$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/KdTree$Node.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kdtree/KdTree.class" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/KdTree.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kdtree/KdTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/KdTree.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kdtree/PointSET.class" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/PointSET.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kdtree/PointSET.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/PointSET.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../kdtree/PointSET.zip" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -96,7 +97,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "E:/Coding_Practices/Coding_Practices/percolation"
+    "last_opened_file_path": "E:/Coding_Practices/Coding_Practices/CollinearPoints"
   }
 }]]></component>
   <component name="RunManager" selected="Application.FastCollinearPoints">

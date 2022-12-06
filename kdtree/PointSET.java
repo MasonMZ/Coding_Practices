@@ -81,11 +81,8 @@ public class PointSET {
             return null;
         }
         double minDistance = Double.POSITIVE_INFINITY;
-        Point2D pointCandidate = p;
+        Point2D pointCandidate = new Point2D(Double.POSITIVE_INFINITY, Double.POSITIVE_INFINITY);
         for (Point2D q : ptSet) {
-            if (p.equals(q)) {
-                continue;
-            }
             if (p.distanceSquaredTo(q) < minDistance) {
                 minDistance = p.distanceSquaredTo(q);
                 pointCandidate = q;

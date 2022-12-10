@@ -5,14 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/../CollinearPoints/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../CollinearPoints/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../kdtree/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kdtree/KdTree$Node.class" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/KdTree$Node.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kdtree/KdTree.class" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/KdTree.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kdtree/KdTree.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/KdTree.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kdtree/PointSET.class" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/PointSET.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kdtree/PointSET.java" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/PointSET.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../kdtree/PointSET.zip" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Algorithms__Part_I.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Algorithms__Part_I.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordnet/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../wordnet/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordnet/SAP.java" beforeDir="false" afterPath="$PROJECT_DIR$/../wordnet/SAP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../wordnet/WordNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/../wordnet/WordNet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,13 +92,13 @@
     <option name="showModules" value="false" />
     <option name="sortByType" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "E:/Coding_Practices/Coding_Practices/puzzle8"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;E:/Coding_Practices/Coding_Practices/puzzle8&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager" selected="Application.Solver">
     <configuration name="Board" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Board" />

@@ -86,6 +86,9 @@ public class WordNet {
 
 
     public static void main(String[] args) {
-        String s =
+        String s = "synsets.txt";
+        String h = "hypernyms.txt";
+        WordNet w1 = new WordNet(s, h);
+        System.out.println(w1.isNoun("fire_control"));
     }
 }

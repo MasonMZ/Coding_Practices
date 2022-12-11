@@ -75,6 +75,9 @@ public class WordNet {
                 synsetsGraph.addEdge(Integer.parseInt(fields[0]), Integer.parseInt(fields[i]));
             }
         }
+        if (!hasRoot) {
+            throw new IllegalArgumentException("The input must be a rooted DAG!");
+        }
 
     }
 
@@ -85,11 +88,17 @@ public class WordNet {
 
     // is the word a WordNet noun?
     public boolean isNoun(String word) {
+        if (word == null) {
+            throw new IllegalArgumentException();
+        }
         return dictionary.containsKey(word);
     }
 
     // distance between nounA and nounB (defined below)
     public int distance(String nounA, String nounB) {
+        if (nounA == null || nounB == null) {
+            throw new IllegalArgumentException();
+        }
         if (!dictionary.containsKey(nounA) || !dictionary.containsKey(nounB)) {
             throw new IllegalArgumentException("The WordNet must contain input nouns!");
         }

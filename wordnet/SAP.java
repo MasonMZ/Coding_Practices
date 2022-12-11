@@ -83,6 +83,24 @@ public class SAP {
 
     // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
     public int length(Iterable<Integer> v, Iterable<Integer> w) {
+        int counterV = 0;
+        for (Object i : v) {
+            if (i == null) {
+                throw new IllegalArgumentException();
+            }
+            counterV++;
+        }
+        int counterW = 0;
+        for (Object i : w) {
+            if (i == null) {
+                throw new IllegalArgumentException();
+            }
+            counterW++;
+        }
+        if (counterV == 0 || counterW == 0) {
+            throw new IllegalArgumentException();
+        }
+
         TreeMap<Integer, Integer> vAncestors = new TreeMap<>();
         BreadthFirstDirectedPaths vBfs = new BreadthFirstDirectedPaths(copyDigraph, v);
         for (int i = 0; i < copyDigraph.V(); i += 1) {

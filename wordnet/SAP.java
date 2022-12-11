@@ -13,7 +13,7 @@ import edu.princeton.cs.algs4.StdOut;
 import java.util.TreeMap;
 
 public class SAP {
-    private Digraph copyDigraph;
+    private final Digraph copyDigraph;
 
     // constructor takes a digraph (not necessarily a DAG)
     public SAP(Digraph G) {
@@ -83,6 +83,9 @@ public class SAP {
 
     // length of shortest ancestral path between any vertex in v and any vertex in w; -1 if no such path
     public int length(Iterable<Integer> v, Iterable<Integer> w) {
+        if (v == null || w == null) {
+            throw new IllegalArgumentException();
+        }
         int counterV = 0;
         for (Object i : v) {
             if (i == null) {

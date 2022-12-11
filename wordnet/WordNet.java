@@ -11,9 +11,9 @@ import edu.princeton.cs.algs4.Stack;
 import java.util.TreeMap;
 
 public class WordNet {
-    private TreeMap<String, Stack<Integer>> dictionary;
-    private TreeMap<Integer, String> reverseDictionary;
-    private Digraph synsetsGraph;
+    private final TreeMap<String, Stack<Integer>> dictionary;
+    private final TreeMap<Integer, String> reverseDictionary;
+    private final Digraph synsetsGraph;
     private int verticeNum;
 
 
@@ -111,6 +111,9 @@ public class WordNet {
     // a synset (second field of synsets.txt) that is the common ancestor of nounA and nounB
     // in a shortest ancestral path (defined below)
     public String sap(String nounA, String nounB) {
+        if (nounA == null || nounB == null) {
+            throw new IllegalArgumentException();
+        }
         if (!dictionary.containsKey(nounA) || !dictionary.containsKey(nounB)) {
             throw new IllegalArgumentException("The WordNet must contain input nouns!");
         }

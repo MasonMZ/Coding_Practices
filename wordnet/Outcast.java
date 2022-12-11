@@ -10,7 +10,7 @@ import edu.princeton.cs.algs4.StdOut;
 import java.util.TreeSet;
 
 public class Outcast {
-    private WordNet w;
+    private final WordNet w;
 
     // constructor takes a WordNet object
     public Outcast(WordNet wordnet) {

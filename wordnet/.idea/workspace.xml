@@ -6,10 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/../kdtree/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../kdtree/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../puzzle8/.idea/inspectionProfiles/Algorithms__Part_I.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../puzzle8/.idea/inspectionProfiles/Algorithms__Part_I.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../puzzle8/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../puzzle8/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/SAP.java" beforeDir="false" afterPath="$PROJECT_DIR$/SAP.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Outcast.java" beforeDir="false" afterPath="$PROJECT_DIR$/Outcast.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/WordNet$intNode.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/WordNet.class" beforeDir="false" afterPath="$PROJECT_DIR$/WordNet.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/WordNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/WordNet.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -158,5 +159,8 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
     </layout>
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/wordnet$WordNet.ic" NAME="WordNet Coverage Results" MODIFIED="1670715211628" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

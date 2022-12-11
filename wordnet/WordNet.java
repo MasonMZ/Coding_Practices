@@ -8,11 +8,11 @@ import edu.princeton.cs.algs4.Digraph;
 import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.Stack;
 
-import java.util.TreeMap;
+import java.util.HashMap;
 
 public class WordNet {
-    private final TreeMap<String, Stack<Integer>> dictionary;
-    private final TreeMap<Integer, String> reverseDictionary;
+    private final HashMap<String, Stack<Integer>> dictionary;
+    private final HashMap<Integer, String> reverseDictionary;
     private final Digraph synsetsGraph;
     private int verticeNum;
 
@@ -32,8 +32,8 @@ public class WordNet {
             throw new IllegalArgumentException("File name nust NOT be null!");
         }
         In synsetsStream = new In(synsets);
-        dictionary = new TreeMap<>();
-        reverseDictionary = new TreeMap<>();
+        dictionary = new HashMap<>();
+        reverseDictionary = new HashMap<>();
 
         while (synsetsStream.hasNextLine()) {
             verticeNum += 1;

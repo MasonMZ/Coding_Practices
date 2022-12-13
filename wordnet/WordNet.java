@@ -17,15 +17,6 @@ public class WordNet {
     private int verticeNum;
 
 
-    // private class intNode {
-    //     private int id;
-    //     private intNode next;
-    //
-    //     public intNode(int i) {
-    //         id = i;
-    //     }
-    // }
-
     // constructor takes the name of the two input files
     public WordNet(String synsets, String hypernyms) {
         if (synsets == null || hypernyms == null) {

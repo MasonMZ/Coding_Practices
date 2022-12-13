@@ -10,7 +10,7 @@ import edu.princeton.cs.algs4.In;
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-import java.util.TreeMap;
+import java.util.HashMap;
 
 public class SAP {
     private final Digraph copyDigraph;
@@ -22,7 +22,7 @@ public class SAP {
 
     // length of shortest ancestral path between v and w; -1 if no such path
     public int length(int v, int w) {
-        TreeMap<Integer, Integer> vAncestors = new TreeMap<>();
+        HashMap<Integer, Integer> vAncestors = new HashMap<>();
         BreadthFirstDirectedPaths vBfs = new BreadthFirstDirectedPaths(copyDigraph, v);
         for (int i = 0; i < copyDigraph.V(); i += 1) {
             if (vBfs.hasPathTo(i)) {
@@ -30,7 +30,7 @@ public class SAP {
             }
         }
 
-        TreeMap<Integer, Integer> wAncestors = new TreeMap<>();
+        HashMap<Integer, Integer> wAncestors = new HashMap<>();
         BreadthFirstDirectedPaths wBfs = new BreadthFirstDirectedPaths(copyDigraph, w);
         for (int i = 0; i < copyDigraph.V(); i += 1) {
             if (wBfs.hasPathTo(i)) {
@@ -54,7 +54,7 @@ public class SAP {
 
     // a common ancestor of v and w that participates in a shortest ancestral path; -1 if no such path
     public int ancestor(int v, int w) {
-        TreeMap<Integer, Integer> vAncestors = new TreeMap<>();
+        HashMap<Integer, Integer> vAncestors = new HashMap<>();
         BreadthFirstDirectedPaths vBfs = new BreadthFirstDirectedPaths(copyDigraph, v);
         for (int i = 0; i < copyDigraph.V(); i += 1) {
             if (vBfs.hasPathTo(i)) {
@@ -62,7 +62,7 @@ public class SAP {
             }
         }
 
-        TreeMap<Integer, Integer> wAncestors = new TreeMap<>();
+        HashMap<Integer, Integer> wAncestors = new HashMap<>();
         BreadthFirstDirectedPaths wBfs = new BreadthFirstDirectedPaths(copyDigraph, w);
         for (int i = 0; i < copyDigraph.V(); i += 1) {
             if (wBfs.hasPathTo(i)) {
@@ -104,7 +104,7 @@ public class SAP {
             throw new IllegalArgumentException();
         }
 
-        TreeMap<Integer, Integer> vAncestors = new TreeMap<>();
+        HashMap<Integer, Integer> vAncestors = new HashMap<>();
         BreadthFirstDirectedPaths vBfs = new BreadthFirstDirectedPaths(copyDigraph, v);
         for (int i = 0; i < copyDigraph.V(); i += 1) {
             if (vBfs.hasPathTo(i)) {
@@ -112,7 +112,7 @@ public class SAP {
             }
         }
 
-        TreeMap<Integer, Integer> wAncestors = new TreeMap<>();
+        HashMap<Integer, Integer> wAncestors = new HashMap<>();
         BreadthFirstDirectedPaths wBfs = new BreadthFirstDirectedPaths(copyDigraph, w);
         for (int i = 0; i < copyDigraph.V(); i += 1) {
             if (wBfs.hasPathTo(i)) {
@@ -136,7 +136,7 @@ public class SAP {
 
     // a common ancestor that participates in shortest ancestral path; -1 if no such path
     public int ancestor(Iterable<Integer> v, Iterable<Integer> w) {
-        TreeMap<Integer, Integer> vAncestors = new TreeMap<>();
+        HashMap<Integer, Integer> vAncestors = new HashMap<>();
         BreadthFirstDirectedPaths vBfs = new BreadthFirstDirectedPaths(copyDigraph, v);
         for (int i = 0; i < copyDigraph.V(); i += 1) {
             if (vBfs.hasPathTo(i)) {
@@ -144,7 +144,7 @@ public class SAP {
             }
         }
 
-        TreeMap<Integer, Integer> wAncestors = new TreeMap<>();
+        HashMap<Integer, Integer> wAncestors = new HashMap<>();
         BreadthFirstDirectedPaths wBfs = new BreadthFirstDirectedPaths(copyDigraph, w);
         for (int i = 0; i < copyDigraph.V(); i += 1) {
             if (wBfs.hasPathTo(i)) {

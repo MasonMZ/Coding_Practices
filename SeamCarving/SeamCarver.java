@@ -60,11 +60,11 @@ public class SeamCarver {
         int rgbLeft = workingPic.getRGB(left, y);
         int rgbRight = workingPic.getRGB(right, y);
         double r_xSquared = Math.pow(
-                ((double) ((rgbLeft >> 16) & 0xFF) - ((rgbRight >> 16) & 0xFF)), 2);
+                ((double) ((rgbLeft >> 16) & 0xFF) - (double) ((rgbRight >> 16) & 0xFF)), 2);
         double g_xSquared = Math.pow(
-                ((double) ((rgbLeft >> 8) & 0xFF) - ((rgbRight >> 8) & 0xFF)), 2);
+                ((double) ((rgbLeft >> 8) & 0xFF) - (double) ((rgbRight >> 8) & 0xFF)), 2);
         double b_xSquared = Math.pow(
-                ((double) ((rgbLeft >> 0) & 0xFF) - ((rgbRight >> 0) & 0xFF)), 2);
+                ((double) ((rgbLeft >> 0) & 0xFF) - (double) ((rgbRight >> 0) & 0xFF)), 2);
         return r_xSquared + g_xSquared + b_xSquared;
     }
 
@@ -74,22 +74,11 @@ public class SeamCarver {
         int rgbUp = workingPic.getRGB(x, upside);
         int rgbDown = workingPic.getRGB(x, downside);
         double r_ySquared = Math.pow(
-                ((double) ((rgbUp >> 16) & 0xFF) - ((rgbDown >> 16) & 0xFF)), 2);
+                ((double) ((rgbUp >> 16) & 0xFF) - (double) ((rgbDown >> 16) & 0xFF)), 2);
         double g_ySquared = Math.pow(
-                ((double) ((rgbUp >> 8) & 0xFF) - ((rgbDown >> 8) & 0xFF)), 2);
+                ((double) ((rgbUp >> 8) & 0xFF) - (double) ((rgbDown >> 8) & 0xFF)), 2);
         double b_ySquared = Math.pow(
-                ((double) ((rgbUp >> 0) & 0xFF) - ((rgbDown >> 0) & 0xFF)), 2);
-        // double r_ySquared = Math.pow(
-        //         ((double) workingPic.get(x, upside).getRed() - workingPic.get(x, downside)
-        //                                                                  .getRed()), 2);
-        // double g_ySquared = Math.pow(
-        //         ((double) workingPic.get(x, upside).getGreen() - workingPic.get(x, downside)
-        //                                                                    .getGreen()),
-        //         2);
-        // double b_ySquared = Math.pow(
-        //         ((double) workingPic.get(x, upside).getBlue() - workingPic.get(x, downside)
-        //                                                                   .getBlue()),
-        //         2);
+                ((double) ((rgbUp >> 0) & 0xFF) - (double) ((rgbDown >> 0) & 0xFF)), 2);
         return r_ySquared + g_ySquared + b_ySquared;
     }
 
@@ -153,29 +142,44 @@ public class SeamCarver {
             isTransposed = !isTransposed;
         }
         pic2Graph();
-        minimizeEnergyPath();
-
-
-        throw new UnsupportedOperationException();
+        return minimizeEnergyPath();
     }
 
-    private void minimizeEnergyPath() {
+    private int[] minimizeEnergyPath() {
         Topological topo = new Topological(workingGraph);
         double[] totalEnergy = new double[workingGraph.V()];
         for (double e : totalEnergy) {
             e = Double.POSITIVE_INFINITY;
         }
-        totalEnergy[0] = energyArray[0][0];
-
-
-        int[] edgeTo = new int[workingGraph.V()];
-
+        totalEnergy[0] = 1000;
+        int[] fromVertex = new int[workingGraph.V()];
+        for (int i : topo.order()) {
+            relax(i, totalEnergy, fromVertex);
+        }
+        Stack<Integer> path = new Stack<>();
+        for (int i = fromVertex[workingGraph.V() - 1]; i != 0; i = fromVertex[i]) {
+            path.push(i);
+        }
+        return pathStack2Array(path);
     }
 
-    private void relax(int vertex, double[] totalEnergy) {
+    private int[] pathStack2Array(Stack<Integer> s) {
+        int[] res = new int[height()];
+        int count = 0;
+        for (int i : s) {
+            count += 1;
+            res[count] = i;
+        }
+        res[0] = res[1] - width();
+        res[count + 1] = res[count] + width();
+        return res;
+    }
+
+    private void relax(int vertex, double[] totalEnergy, int[] fromVertex) {
         for (int i : verticesFrom(vertex)) {
             if (energyOf(vertex) + energyOf(i) < totalEnergy[i]) {
-
+                totalEnergy[i] = energyOf(vertex) + energyOf(i);
+                fromVertex[i] = vertex;
             }
         }
     }
@@ -206,6 +210,17 @@ public class SeamCarver {
             s.push(i + w + 1);
         }
         return s;
+    }
+
+    private double energyOf(int i) {
+        int h = height();
+        int w = width();
+        if (i == 0 || i == (h - 2) * w + 1) {
+            return 1000;
+        }
+        else {
+            return energyArray[(i - 1) % w][(i - 1) / w + 1];
+        }
     }
 
     private void transpose(Picture p) {

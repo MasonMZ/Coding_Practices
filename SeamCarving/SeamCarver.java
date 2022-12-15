@@ -6,11 +6,13 @@
 
 import edu.princeton.cs.algs4.Digraph;
 import edu.princeton.cs.algs4.Picture;
+import edu.princeton.cs.algs4.Topological;
 
 public class SeamCarver {
     private Picture workingPic;
     private double[][] energyArray;
     private Digraph workingGraph;
+    private boolean isTransposed = false;
 
     // create a seam carver object based on the given picture
     public SeamCarver(Picture picture) {
@@ -47,9 +49,6 @@ public class SeamCarver {
     public double energy(int x, int y) {
         if (x < 0 || x > (width() - 1) || y < 0 || y > (height() - 1)) {
             throw new IllegalArgumentException();
-        }
-        if (x == 0 || x == (width() - 1) || y == 0 || y == (height() - 1)) {
-            return 1000;
         }
         return energyArray[x][y];
     }
@@ -148,7 +147,29 @@ public class SeamCarver {
 
     // sequence of indices for vertical seam
     public int[] findVerticalSeam() {
+        if (isTransposed) {
+            transpose(workingPic);
+            isTransposed = !isTransposed;
+        }
+        pic2Graph();
+        Topological topo = new Topological(workingGraph);
+
         throw new UnsupportedOperationException();
+    }
+
+    private void transpose(Picture p) {
+        int h = height();
+        int w = width();
+        Picture auxPic = new Picture(h, w);
+        double[][] auxEnergyArray = new double[h][w];
+        for (int i = 0; i < h; i += 1) {
+            for (int j = 0; j < w; j += 1) {
+                auxPic.set(i, j, p.get(j, i));
+                auxEnergyArray[i][j] = energyArray[j][i];
+            }
+        }
+        workingPic = auxPic;
+        energyArray = auxEnergyArray;
     }
 
     // remove horizontal seam from current picture

@@ -6,6 +6,7 @@
 
 import edu.princeton.cs.algs4.Digraph;
 import edu.princeton.cs.algs4.Picture;
+import edu.princeton.cs.algs4.Stack;
 import edu.princeton.cs.algs4.Topological;
 
 public class SeamCarver {
@@ -152,9 +153,59 @@ public class SeamCarver {
             isTransposed = !isTransposed;
         }
         pic2Graph();
-        Topological topo = new Topological(workingGraph);
+        minimizeEnergyPath();
+
 
         throw new UnsupportedOperationException();
+    }
+
+    private void minimizeEnergyPath() {
+        Topological topo = new Topological(workingGraph);
+        double[] totalEnergy = new double[workingGraph.V()];
+        for (double e : totalEnergy) {
+            e = Double.POSITIVE_INFINITY;
+        }
+        totalEnergy[0] = energyArray[0][0];
+
+
+        int[] edgeTo = new int[workingGraph.V()];
+
+    }
+
+    private void relax(int vertex, double[] totalEnergy) {
+        for (int i : verticesFrom(vertex)) {
+            if (energyOf(vertex) + energyOf(i) < totalEnergy[i]) {
+
+            }
+        }
+    }
+
+    private Iterable<Integer> verticesFrom(int i) {
+        Stack<Integer> s = new Stack<>();
+        int h = height();
+        int w = width();
+        if (i == 0) {
+            for (int j = 0; j < w; j += 1) {
+                s.push(j + 1);
+            }
+        }
+        else if (i > (h - 3) * w && i < (h - 2) * w + 1) {
+            s.push((h - 2) * w + 1);
+        }
+        else if (i % w == 1) {
+            s.push(i + w);
+            s.push(i + w + 1);
+        }
+        else if (i % w == 0) {
+            s.push(i + w - 1);
+            s.push(i + w);
+        }
+        else {
+            s.push(i + w - 1);
+            s.push(i + w);
+            s.push(i + w + 1);
+        }
+        return s;
     }
 
     private void transpose(Picture p) {

@@ -7,7 +7,6 @@
 import edu.princeton.cs.algs4.Digraph;
 import edu.princeton.cs.algs4.Picture;
 import edu.princeton.cs.algs4.Stack;
-import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Topological;
 
 public class SeamCarver {
@@ -60,13 +59,13 @@ public class SeamCarver {
         int right = x + 1;
         int rgbLeft = workingPic.getRGB(left, y);
         int rgbRight = workingPic.getRGB(right, y);
-        double r_xSquared = Math.pow(
+        double rxSquared = Math.pow(
                 ((double) ((rgbLeft >> 16) & 0xFF) - (double) ((rgbRight >> 16) & 0xFF)), 2);
-        double g_xSquared = Math.pow(
+        double gxSquared = Math.pow(
                 ((double) ((rgbLeft >> 8) & 0xFF) - (double) ((rgbRight >> 8) & 0xFF)), 2);
-        double b_xSquared = Math.pow(
+        double bxSquared = Math.pow(
                 ((double) ((rgbLeft >> 0) & 0xFF) - (double) ((rgbRight >> 0) & 0xFF)), 2);
-        return r_xSquared + g_xSquared + b_xSquared;
+        return rxSquared + gxSquared + bxSquared;
     }
 
     private double yGradientSquared(int x, int y) {
@@ -74,13 +73,13 @@ public class SeamCarver {
         int downside = y + 1;
         int rgbUp = workingPic.getRGB(x, upside);
         int rgbDown = workingPic.getRGB(x, downside);
-        double r_ySquared = Math.pow(
+        double rySquared = Math.pow(
                 ((double) ((rgbUp >> 16) & 0xFF) - (double) ((rgbDown >> 16) & 0xFF)), 2);
-        double g_ySquared = Math.pow(
+        double gySquared = Math.pow(
                 ((double) ((rgbUp >> 8) & 0xFF) - (double) ((rgbDown >> 8) & 0xFF)), 2);
-        double b_ySquared = Math.pow(
+        double bySquared = Math.pow(
                 ((double) ((rgbUp >> 0) & 0xFF) - (double) ((rgbDown >> 0) & 0xFF)), 2);
-        return r_ySquared + g_ySquared + b_ySquared;
+        return rySquared + gySquared + bySquared;
     }
 
     private double pixelwisedEnergy(int x, int y) {
@@ -137,6 +136,9 @@ public class SeamCarver {
             transpose(workingPic);
             isTransposed = !isTransposed;
         }
+        if (workingPic.height() <= 1) {
+            throw new IllegalArgumentException();
+        }
         pic2Graph();
         return minimizeEnergyPath();
     }
@@ -146,6 +148,9 @@ public class SeamCarver {
         if (isTransposed) {
             transpose(workingPic);
             isTransposed = !isTransposed;
+        }
+        if (workingPic.width() <= 1) {
+            throw new IllegalArgumentException();
         }
         pic2Graph();
         return minimizeEnergyPath();
@@ -260,6 +265,12 @@ public class SeamCarver {
         if (seam == null || seam.length != w) {
             throw new IllegalArgumentException();
         }
+        for (int i = 0; i < w - 1; i += 1) {
+            if (seam[i] < 0 || seam[i] >= h || Math.abs(seam[i] - seam[i + 1]) > 1) {
+                throw new IllegalArgumentException();
+            }
+        }
+
         double[][] auxArray = new double[w][h - 1];
         Picture auxPic = new Picture(w, h - 1);
         for (int i = 0; i < w; i += 1) {
@@ -281,6 +292,11 @@ public class SeamCarver {
         if (seam == null || seam.length != h) {
             throw new IllegalArgumentException();
         }
+        for (int i = 0; i < h - 1; i += 1) {
+            if (seam[i] < 0 || seam[i] >= w || Math.abs(seam[i] - seam[i + 1]) > 1) {
+                throw new IllegalArgumentException();
+            }
+        }
         double[][] auxArray = new double[w - 1][h];
         Picture auxPic = new Picture(w - 1, h);
         for (int i = 0; i < h; i += 1) {
@@ -298,31 +314,31 @@ public class SeamCarver {
     }
 
     public static void main(String[] args) {
-        Picture picture = new Picture("6x5.png");
-        SeamCarver sc = new SeamCarver(picture);
-        for (int row = 0; row < sc.height(); row++) {
-            for (int col = 0; col < sc.width(); col++)
-                StdOut.printf("%9.2f ", sc.energy(col, row));
-            StdOut.println();
-        }
-        // StdOut.println();
-        // StdOut.println();
-        // for (double i : sc.energyArray[2]) {
-        //     StdOut.printf("%9.2f ", i);
+        // Picture picture = new Picture("6x5.png");
+        // SeamCarver sc = new SeamCarver(picture);
+        // for (int row = 0; row < sc.height(); row++) {
+        //     for (int col = 0; col < sc.width(); col++)
+        //         StdOut.printf("%9.2f ", sc.energy(col, row));
+        //     StdOut.println();
         // }
-        // int[] res = sc.findVerticalSeam();
-        int[] res = sc.findHorizontalSeam();
-        for (int i : res) {
-            System.out.println(i);
-        }
-        // sc.removeVerticalSeam(res);
-        sc.removeHorizontalSeam(res);
-
-        for (int row = 0; row < sc.height(); row++) {
-            for (int col = 0; col < sc.width(); col++)
-                StdOut.printf("%9.2f ", sc.energy(col, row));
-            StdOut.println();
-        }
+        // // StdOut.println();
+        // // StdOut.println();
+        // // for (double i : sc.energyArray[2]) {
+        // //     StdOut.printf("%9.2f ", i);
+        // // }
+        // // int[] res = sc.findVerticalSeam();
+        // int[] res = sc.findHorizontalSeam();
+        // for (int i : res) {
+        //     System.out.println(i);
+        // }
+        // // sc.removeVerticalSeam(res);
+        // sc.removeHorizontalSeam(res);
+        //
+        // for (int row = 0; row < sc.height(); row++) {
+        //     for (int col = 0; col < sc.width(); col++)
+        //         StdOut.printf("%9.2f ", sc.energy(col, row));
+        //     StdOut.println();
+        // }
 
     }
 }

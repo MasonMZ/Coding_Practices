@@ -276,7 +276,14 @@ public class SeamCarver {
         for (int i = 0; i < w; i += 1) {
             System.arraycopy(energyArray[i], 0, auxArray[i], 0, seam[i]);
             System.arraycopy(energyArray[i], seam[i] + 1, auxArray[i], seam[i], h - 1 - seam[i]);
+            for (int j = 0; j < seam[i]; j += 1) {
+                auxPic.set(i, j, workingPic.get(i, j));
+            }
+            for (int j = seam[i]; j < h - 1; j += 1) {
+                auxPic.set(i, j, workingPic.get(i, j + 1));
+            }
         }
+
         energyArray = auxArray;
         workingPic = auxPic;
     }

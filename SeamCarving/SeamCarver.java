@@ -7,6 +7,7 @@
 import edu.princeton.cs.algs4.Digraph;
 import edu.princeton.cs.algs4.Picture;
 import edu.princeton.cs.algs4.Stack;
+import edu.princeton.cs.algs4.StdOut;
 import edu.princeton.cs.algs4.Topological;
 
 public class SeamCarver {
@@ -96,7 +97,7 @@ public class SeamCarver {
         workingGraph = new Digraph(width() * (height() - 2) + 2);
         for (int i = 0; i < width(); i += 1) {
             workingGraph.addEdge(0, i + 1);
-            workingGraph.addEdge(width() * (height() - 3) + i, width() * (height() - 2) + 1);
+            workingGraph.addEdge(width() * (height() - 3) + i + 1, width() * (height() - 2) + 1);
         }
         for (int row = 0; row < (height() - 3); row += 1) {
             for (int col = 0; col < width(); col += 1) {
@@ -132,7 +133,12 @@ public class SeamCarver {
 
     // sequence of indices for horizontal seam
     public int[] findHorizontalSeam() {
-        throw new UnsupportedOperationException();
+        if (!isTransposed) {
+            transpose(workingPic);
+            isTransposed = !isTransposed;
+        }
+        pic2Graph();
+        return minimizeEnergyPath();
     }
 
     // sequence of indices for vertical seam
@@ -147,38 +153,43 @@ public class SeamCarver {
 
     private int[] minimizeEnergyPath() {
         Topological topo = new Topological(workingGraph);
-        double[] totalEnergy = new double[workingGraph.V()];
-        for (double e : totalEnergy) {
-            e = Double.POSITIVE_INFINITY;
+        int verticesNum = workingGraph.V();
+        double[] totalEnergy = new double[verticesNum];
+        for (int i = 0; i < verticesNum; i += 1) {
+            totalEnergy[i] = Double.POSITIVE_INFINITY;
         }
         totalEnergy[0] = 1000;
-        int[] fromVertex = new int[workingGraph.V()];
+        int[] fromVertex = new int[verticesNum];
         for (int i : topo.order()) {
-            relax(i, totalEnergy, fromVertex);
+            if (i < verticesNum - 1) {
+                relax(i, totalEnergy, fromVertex);
+            }
         }
         Stack<Integer> path = new Stack<>();
-        for (int i = fromVertex[workingGraph.V() - 1]; i != 0; i = fromVertex[i]) {
+        for (int i = fromVertex[verticesNum - 1]; i != 0; i = fromVertex[i]) {
             path.push(i);
         }
         return pathStack2Array(path);
     }
 
     private int[] pathStack2Array(Stack<Integer> s) {
-        int[] res = new int[height()];
+        int h = height();
+        int w = width();
+        int[] res = new int[h];
         int count = 0;
         for (int i : s) {
             count += 1;
-            res[count] = i;
+            res[count] = i % w - 1;
         }
-        res[0] = res[1] - width();
-        res[count + 1] = res[count] + width();
+        res[0] = res[1];
+        res[count + 1] = res[count];
         return res;
     }
 
     private void relax(int vertex, double[] totalEnergy, int[] fromVertex) {
         for (int i : verticesFrom(vertex)) {
-            if (energyOf(vertex) + energyOf(i) < totalEnergy[i]) {
-                totalEnergy[i] = energyOf(vertex) + energyOf(i);
+            if (totalEnergy[vertex] + energyOf(i) < totalEnergy[i]) {
+                totalEnergy[i] = totalEnergy[vertex] + energyOf(i);
                 fromVertex[i] = vertex;
             }
         }
@@ -240,15 +251,78 @@ public class SeamCarver {
 
     // remove horizontal seam from current picture
     public void removeHorizontalSeam(int[] seam) {
-        throw new UnsupportedOperationException();
+        if (isTransposed) {
+            transpose(workingPic);
+            isTransposed = !isTransposed;
+        }
+        int w = width();
+        int h = height();
+        if (seam == null || seam.length != w) {
+            throw new IllegalArgumentException();
+        }
+        double[][] auxArray = new double[w][h - 1];
+        Picture auxPic = new Picture(w, h - 1);
+        for (int i = 0; i < w; i += 1) {
+            System.arraycopy(energyArray[i], 0, auxArray[i], 0, seam[i]);
+            System.arraycopy(energyArray[i], seam[i] + 1, auxArray[i], seam[i], h - 1 - seam[i]);
+        }
+        energyArray = auxArray;
+        workingPic = auxPic;
     }
 
     // remove vertical seam from current picture
     public void removeVerticalSeam(int[] seam) {
-        throw new UnsupportedOperationException();
+        if (isTransposed) {
+            transpose(workingPic);
+            isTransposed = !isTransposed;
+        }
+        int w = width();
+        int h = height();
+        if (seam == null || seam.length != h) {
+            throw new IllegalArgumentException();
+        }
+        double[][] auxArray = new double[w - 1][h];
+        Picture auxPic = new Picture(w - 1, h);
+        for (int i = 0; i < h; i += 1) {
+            for (int j = 0; j < seam[i]; j += 1) {
+                auxArray[j][i] = energyArray[j][i];
+                auxPic.set(j, i, workingPic.get(j, i));
+            }
+            for (int j = seam[i]; j < w - 1; j += 1) {
+                auxArray[j][i] = energyArray[j + 1][i];
+                auxPic.set(j, i, workingPic.get(j + 1, i));
+            }
+        }
+        energyArray = auxArray;
+        workingPic = auxPic;
     }
 
     public static void main(String[] args) {
+        Picture picture = new Picture("6x5.png");
+        SeamCarver sc = new SeamCarver(picture);
+        for (int row = 0; row < sc.height(); row++) {
+            for (int col = 0; col < sc.width(); col++)
+                StdOut.printf("%9.2f ", sc.energy(col, row));
+            StdOut.println();
+        }
+        // StdOut.println();
+        // StdOut.println();
+        // for (double i : sc.energyArray[2]) {
+        //     StdOut.printf("%9.2f ", i);
+        // }
+        // int[] res = sc.findVerticalSeam();
+        int[] res = sc.findHorizontalSeam();
+        for (int i : res) {
+            System.out.println(i);
+        }
+        // sc.removeVerticalSeam(res);
+        sc.removeHorizontalSeam(res);
+
+        for (int row = 0; row < sc.height(); row++) {
+            for (int col = 0; col < sc.width(); col++)
+                StdOut.printf("%9.2f ", sc.energy(col, row));
+            StdOut.println();
+        }
 
     }
 }

@@ -96,7 +96,7 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "E:/Coding_Practices/Coding_Practices/SeamCarving"
+    "last_opened_file_path": "E:/Coding_Practices/Coding_Practices/wordnet"
   }
 }]]></component>
   <component name="RunManager">
@@ -158,8 +158,5 @@
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="right" id="Palette&#9;" order="3" />
     </layout>
-  </component>
-  <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/wordnet$WordNet.ic" NAME="WordNet Coverage Results" MODIFIED="1670715211628" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" />
   </component>
 </project>

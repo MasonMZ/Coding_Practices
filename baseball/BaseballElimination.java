@@ -6,12 +6,16 @@
 
 import edu.princeton.cs.algs4.In;
 
+import java.util.Arrays;
+import java.util.HashMap;
+
 public class BaseballElimination {
-    String[] teams;
-    int[] wins;
-    int[] losses;
-    int[] remainingGames;
-    int[][] g;
+    private String[] teams;
+    private int[] wins;
+    private int[] losses;
+    private int[] remainingGames;
+    private int[][] g;
+    private HashMap<String, Integer> teamIdPair;
 
     /** create a baseball division from given filename */
     public BaseballElimination(String filename) {
@@ -34,6 +38,7 @@ public class BaseballElimination {
             String currLineString = inputStream.readLine();
             String[] fields = currLineString.split("\\s+");
             teams[count] = fields[0];
+            teamIdPair.put(fields[0], count);
             wins[count] = Integer.parseInt(fields[1]);
             losses[count] = Integer.parseInt(fields[2]);
             remainingGames[count] = Integer.parseInt(fields[3]);
@@ -42,7 +47,48 @@ public class BaseballElimination {
             }
             count += 1;
         }
+    }
 
+    /** number of teams */
+    public int numberOfTeams() {
+        return teams.length;
+    }
+
+    /** all teams */
+    public Iterable<String> teams() {
+        return Arrays.asList(teams);
+    }
+
+    /** number of wins for given team */
+    public int wins(String team) {
+        if (!teamIdPair.containsKey(team)) {
+            throw new IllegalArgumentException("The team is not in the division!");
+        }
+        return wins[teamIdPair.get(team)];
+    }
+
+    /** number of losses for given team */
+    public int losses(String team) {
+        if (!teamIdPair.containsKey(team)) {
+            throw new IllegalArgumentException("The team is not in the division!");
+        }
+        return losses[teamIdPair.get(team)];
+    }
+
+    /** number of remaining games for given team */
+    public int remaining(String team) {
+        if (!teamIdPair.containsKey(team)) {
+            throw new IllegalArgumentException("The team is not in the division!");
+        }
+        return remainingGames[teamIdPair.get(team)];
+    }
+
+    /** number of remaining games between team1 and team2 */
+    public int against(String team1, String team2) {
+        if (!teamIdPair.containsKey(team1) || !teamIdPair.containsKey(team2)) {
+            throw new IllegalArgumentException("The team is not in the division!");
+        }
+        return g[teamIdPair.get(team1)][teamIdPair.get(team2)];
     }
 
     public static void main(String[] args) {

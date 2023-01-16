@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="" />
+    <list default="true" id="c1e4f978-b3bd-4ae1-84e9-9e1170bce808" name="Default" comment="">
+      <change beforePath="$PROJECT_DIR$/../SeamCarving/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../SeamCarving/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BaseballElimination.java" beforeDir="false" afterPath="$PROJECT_DIR$/BaseballElimination.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -36,6 +40,12 @@
   <component name="FormatOnSaveOptions">
     <option name="myRunOnSave" value="true" />
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
   <component name="OptimizeOnSaveOptions">
     <option name="myRunOnSave" value="true" />
   </component>
@@ -46,6 +56,7 @@
     <option name="height" value="765" />
   </component>
   <component name="ProjectId" id="2BZwWqOJeDbrQGpNxQL7XU2irA8" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
       <showLibraryContents PackagesPane="false" />
@@ -82,10 +93,19 @@
   "keyToString": {
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "last_opened_file_path": "E:/Coding_Practices/Coding_Practices/wordnet"
+    "last_opened_file_path": "E:/Coding_Practices/Coding_Practices/baseball"
   }
 }]]></component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="project-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <created>1673886488423</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1673886488423</updated>
+    </task>
+    <servers />
+  </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
       <is-autoscroll-to-source value="true" />

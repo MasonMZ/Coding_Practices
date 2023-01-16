@@ -143,11 +143,7 @@ public class SeamCarver {
 
     // sequence of indices for horizontal seam
     public int[] findHorizontalSeam() {
-        if (!isTransposed) {
-            transpose(workingPic);
-            isTransposed = !isTransposed;
-        }
-        if (workingPic.height() <= 1) {
+        if (workingPic.height() == 1) {
             int[] res = new int[width()];
             return res;
         }
@@ -157,17 +153,17 @@ public class SeamCarver {
         if (workingPic.width() == 2) {
             return new int[] { 0, 0 };
         }
+        if (!isTransposed) {
+            transpose(workingPic);
+            isTransposed = !isTransposed;
+        }
         pic2Graph();
         return minimizeEnergyPath();
     }
 
     // sequence of indices for vertical seam
     public int[] findVerticalSeam() {
-        if (isTransposed) {
-            transpose(workingPic);
-            isTransposed = !isTransposed;
-        }
-        if (workingPic.width() <= 1) {
+        if (workingPic.width() == 1) {
             int[] res = new int[height()];
             return res;
         }
@@ -176,6 +172,10 @@ public class SeamCarver {
         }
         if (workingPic.height() == 2) {
             return new int[] { 0, 0 };
+        }
+        if (isTransposed) {
+            transpose(workingPic);
+            isTransposed = !isTransposed;
         }
         pic2Graph();
         return minimizeEnergyPath();

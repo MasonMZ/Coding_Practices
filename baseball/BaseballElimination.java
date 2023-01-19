@@ -6,6 +6,7 @@
 
 import edu.princeton.cs.algs4.FlowEdge;
 import edu.princeton.cs.algs4.FlowNetwork;
+import edu.princeton.cs.algs4.FordFulkerson;
 import edu.princeton.cs.algs4.In;
 
 import java.util.ArrayList;
@@ -121,10 +122,12 @@ public class BaseballElimination {
         int target = (n - 1) * (n - 2) / 2 + n;
         FlowNetwork f = new FlowNetwork(verticeNum);
         int matchCount = 0;
+        int fullflow = 0;
         for (int i = 0; i < currTeamNum; i += 1) {
             f.addEdge(new FlowEdge(i, target, wins[i] + remainingGames[i] - wins[currTeamNum]));
             for (int j = 0; j < opponents[i].size(); j += 1) {
                 f.addEdge(new FlowEdge(source, n - 1 + matchCount, g[i][j]));
+                fullflow += g[i][j];
                 f.addEdge(new FlowEdge(n - 1 + matchCount, i, Double.POSITIVE_INFINITY));
                 matchCount += 1;
             }
@@ -134,10 +137,28 @@ public class BaseballElimination {
                                    wins[i + 1] + remainingGames[i + 1] - wins[currTeamNum]));
             for (int j = 0; j < opponents[i + 1].size(); j += 1) {
                 f.addEdge(new FlowEdge(source, n - 1 + matchCount, g[i + 1][j]));
+                fullflow += g[i + 1][j];
                 f.addEdge(new FlowEdge(n - 1 + matchCount, i, Double.POSITIVE_INFINITY));
                 matchCount += 1;
             }
         }
+        FordFulkerson ff = new FordFulkerson(f, source, target);
+        if (ff.value() == fullflow) {
+            return;
+        }
+        else {
+            for (int i = 0; i < currTeamNum; i += 1) {
+                if (ff.inCut(i)) {
+                    coe[currTeamNum].add(teams[i]);
+                }
+            }
+            for (int i = currTeamNum + 1; i < n - 1; i += 1) {
+                if (ff.inCut(i)) {
+                    coe[currTeamNum].add(teams[i + 1]);
+                }
+            }
+        }
+
 
     }
 

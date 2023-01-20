@@ -8,7 +8,6 @@ import edu.princeton.cs.algs4.FlowEdge;
 import edu.princeton.cs.algs4.FlowNetwork;
 import edu.princeton.cs.algs4.FordFulkerson;
 import edu.princeton.cs.algs4.In;
-import edu.princeton.cs.algs4.StdOut;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -166,7 +165,6 @@ public class BaseballElimination {
             }
 
         }
-        // System.out.println(f.toString());
         FordFulkerson ff = new FordFulkerson(f, source, target);
         if (ff.value() == fullflow) {
             return;
@@ -207,7 +205,6 @@ public class BaseballElimination {
         else {
             return (coe[teamIdPair.get(team)]);
         }
-
     }
 
 
@@ -223,19 +220,19 @@ public class BaseballElimination {
         //     System.out.println(division.g[3][i]);
         // }
 
-        BaseballElimination division = new BaseballElimination("teams5.txt");
-        for (String team : division.teams()) {
-            if (division.isEliminated(team)) {
-                StdOut.print(team + " is eliminated by the subset R = { ");
-                for (String t : division.certificateOfElimination(team)) {
-                    StdOut.print(t + " ");
-                }
-                StdOut.println("}");
-            }
-            else {
-                StdOut.println(team + " is not eliminated");
-            }
-        }
+        // BaseballElimination division = new BaseballElimination("teams5.txt");
+        // for (String team : division.teams()) {
+        //     if (division.isEliminated(team)) {
+        //         StdOut.print(team + " is eliminated by the subset R = { ");
+        //         for (String t : division.certificateOfElimination(team)) {
+        //             StdOut.print(t + " ");
+        //         }
+        //         StdOut.println("}");
+        //     }
+        //     else {
+        //         StdOut.println(team + " is not eliminated");
+        //     }
+        // }
 
     }
 }

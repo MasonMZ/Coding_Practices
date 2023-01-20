@@ -8,6 +8,7 @@ import edu.princeton.cs.algs4.FlowEdge;
 import edu.princeton.cs.algs4.FlowNetwork;
 import edu.princeton.cs.algs4.FordFulkerson;
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdOut;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,6 +29,7 @@ public class BaseballElimination {
         In inputStream = new In(filename);
         int count = 0;
         int teamNum;
+        teamIdPair = new HashMap<>();
         if (inputStream.hasNextLine()) {
             teamNum = Integer.parseInt(inputStream.readLine());
             teams = new String[teamNum];
@@ -35,6 +37,10 @@ public class BaseballElimination {
             losses = new int[teamNum];
             remainingGames = new int[teamNum];
             g = new int[teamNum][teamNum];
+            coe = new ArrayList[teamNum];
+            for (int i = 0; i < teamNum; i += 1) {
+                coe[i] = new ArrayList<>();
+            }
         }
         else {
             throw new IllegalArgumentException();
@@ -48,9 +54,10 @@ public class BaseballElimination {
             wins[count] = Integer.parseInt(fields[1]);
             losses[count] = Integer.parseInt(fields[2]);
             remainingGames[count] = Integer.parseInt(fields[3]);
-            opponents = new ArrayList<>[teamNum];
+            opponents = new ArrayList[teamNum];
             for (int i = 0; i < teamNum; i += 1) {
                 g[count][i] = Integer.parseInt(fields[4 + i]);
+                opponents[i] = new ArrayList<Integer>();
                 for (int j = i + 1; j < teamNum; j += 1) {
                     opponents[i].add(j);
                 }
@@ -105,7 +112,7 @@ public class BaseballElimination {
     private void getCoe(String team) {
         int n = teams.length;
         int currTeamNum = teamIdPair.get(team);
-        if (coe[currTeamNum] != null) {
+        if (coe[currTeamNum].size() != 0) {
             return;
         }
         for (int i = 0; i < n; i += 1) {
@@ -124,24 +131,42 @@ public class BaseballElimination {
         int matchCount = 0;
         int fullflow = 0;
         for (int i = 0; i < currTeamNum; i += 1) {
-            f.addEdge(new FlowEdge(i, target, wins[i] + remainingGames[i] - wins[currTeamNum]));
-            for (int j = 0; j < opponents[i].size(); j += 1) {
+            f.addEdge(new FlowEdge(i, target,
+                                   wins[currTeamNum] + remainingGames[currTeamNum] - wins[i]));
+            for (int j : opponents[i]) {
+                if (j == currTeamNum) {
+                    continue;
+                }
                 f.addEdge(new FlowEdge(source, n - 1 + matchCount, g[i][j]));
                 fullflow += g[i][j];
-                f.addEdge(new FlowEdge(n - 1 + matchCount, i, Double.POSITIVE_INFINITY));
                 matchCount += 1;
             }
         }
         for (int i = currTeamNum; i < n - 1; i += 1) {
             f.addEdge(new FlowEdge(i, target,
-                                   wins[i + 1] + remainingGames[i + 1] - wins[currTeamNum]));
-            for (int j = 0; j < opponents[i + 1].size(); j += 1) {
+                                   wins[currTeamNum] + remainingGames[currTeamNum] - wins[i + 1]));
+            for (int j : opponents[i + 1]) {
+                if (j == currTeamNum) {
+                    continue;
+                }
                 f.addEdge(new FlowEdge(source, n - 1 + matchCount, g[i + 1][j]));
                 fullflow += g[i + 1][j];
-                f.addEdge(new FlowEdge(n - 1 + matchCount, i, Double.POSITIVE_INFINITY));
                 matchCount += 1;
             }
         }
+
+        int oldVerNum = 0;
+        int newVerNum = 0;
+        for (int i = 0; i < n - 1; i += 1) {
+            newVerNum = oldVerNum;
+            for (int j = i + 1; j < n - 1; j += 1) {
+                f.addEdge(new FlowEdge(n - 2 + newVerNum + j - i, i, Double.POSITIVE_INFINITY));
+                f.addEdge(new FlowEdge(n - 2 + newVerNum + j - i, j, Double.POSITIVE_INFINITY));
+                oldVerNum += 1;
+            }
+
+        }
+        // System.out.println(f.toString());
         FordFulkerson ff = new FordFulkerson(f, source, target);
         if (ff.value() == fullflow) {
             return;
@@ -152,14 +177,12 @@ public class BaseballElimination {
                     coe[currTeamNum].add(teams[i]);
                 }
             }
-            for (int i = currTeamNum + 1; i < n - 1; i += 1) {
+            for (int i = currTeamNum; i < n - 1; i += 1) {
                 if (ff.inCut(i)) {
                     coe[currTeamNum].add(teams[i + 1]);
                 }
             }
         }
-
-
     }
 
     /** is given team eliminated? */
@@ -169,7 +192,22 @@ public class BaseballElimination {
         }
         getCoe(team);
         int currTeamNum = teamIdPair.get(team);
-        return !(coe[currTeamNum] == null);
+        return (coe[currTeamNum].size() != 0);
+    }
+
+    /** subset R of teams that eliminates given team; null if not eliminated */
+    public Iterable<String> certificateOfElimination(String team) {
+        if (!teamIdPair.containsKey(team)) {
+            throw new IllegalArgumentException("The team is not in the division!");
+        }
+        getCoe(team);
+        if (coe[teamIdPair.get(team)].size() == 0) {
+            return null;
+        }
+        else {
+            return (coe[teamIdPair.get(team)]);
+        }
+
     }
 
 
@@ -184,6 +222,20 @@ public class BaseballElimination {
         // for (int i = 0; i < division.teams.length; i += 1) {
         //     System.out.println(division.g[3][i]);
         // }
+
+        BaseballElimination division = new BaseballElimination("teams5.txt");
+        for (String team : division.teams()) {
+            if (division.isEliminated(team)) {
+                StdOut.print(team + " is eliminated by the subset R = { ");
+                for (String t : division.certificateOfElimination(team)) {
+                    StdOut.print(t + " ");
+                }
+                StdOut.println("}");
+            }
+            else {
+                StdOut.println(team + " is not eliminated");
+            }
+        }
 
     }
 }

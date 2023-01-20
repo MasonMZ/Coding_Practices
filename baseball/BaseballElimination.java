@@ -8,6 +8,7 @@ import edu.princeton.cs.algs4.FlowEdge;
 import edu.princeton.cs.algs4.FlowNetwork;
 import edu.princeton.cs.algs4.FordFulkerson;
 import edu.princeton.cs.algs4.In;
+import edu.princeton.cs.algs4.StdOut;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -20,7 +21,7 @@ public class BaseballElimination {
     private int[] remainingGames;
     private int[][] g; // num of remaining games between two teams i and j
     private ArrayList<Integer>[] opponents;
-    private HashMap<String, Integer> teamIdPair;
+    private final HashMap<String, Integer> teamIdPair;
     private ArrayList<String>[] coe;
 
     /** create a baseball division from given filename */
@@ -36,33 +37,32 @@ public class BaseballElimination {
             losses = new int[teamNum];
             remainingGames = new int[teamNum];
             g = new int[teamNum][teamNum];
-            coe = new ArrayList[teamNum];
+            coe = (ArrayList<String>[]) new ArrayList[teamNum];
+            opponents = (ArrayList<Integer>[]) new ArrayList[teamNum];
             for (int i = 0; i < teamNum; i += 1) {
-                coe[i] = new ArrayList<>();
+                coe[i] = new ArrayList<String>();
             }
         }
         else {
             throw new IllegalArgumentException();
         }
 
-        while (inputStream.hasNextLine()) {
-            String currLineString = inputStream.readLine();
-            String[] fields = currLineString.split("\\s+");
-            teams[count] = fields[0];
-            teamIdPair.put(fields[0], count);
-            wins[count] = Integer.parseInt(fields[1]);
-            losses[count] = Integer.parseInt(fields[2]);
-            remainingGames[count] = Integer.parseInt(fields[3]);
-            opponents = new ArrayList[teamNum];
-            for (int i = 0; i < teamNum; i += 1) {
-                g[count][i] = Integer.parseInt(fields[4 + i]);
-                opponents[i] = new ArrayList<Integer>();
-                for (int j = i + 1; j < teamNum; j += 1) {
-                    opponents[i].add(j);
-                }
+        for (int i = 0; i < teamNum; i += 1) {
+            teams[i] = inputStream.readString();
+            teamIdPair.put(teams[i], i);
+            wins[i] = inputStream.readInt();
+            losses[i] = inputStream.readInt();
+            remainingGames[i] = inputStream.readInt();
+            for (int j = 0; j < teamNum; j += 1) {
+                g[i][j] = inputStream.readInt();
             }
-            count += 1;
+            opponents[i] = new ArrayList<Integer>();
+            for (int k = i + 1; k < teamNum; k += 1) {
+                opponents[i].add(k);
+            }
+
         }
+
     }
 
     /** number of teams */
@@ -108,7 +108,7 @@ public class BaseballElimination {
     }
 
     /** Helper function to get coe */
-    private void getCoe(String team) {
+    private void calCoe(String team) {
         int n = teams.length;
         int currTeamNum = teamIdPair.get(team);
         if (coe[currTeamNum].size() != 0) {
@@ -188,7 +188,7 @@ public class BaseballElimination {
         if (!teamIdPair.containsKey(team)) {
             throw new IllegalArgumentException("The team is not in the division!");
         }
-        getCoe(team);
+        calCoe(team);
         int currTeamNum = teamIdPair.get(team);
         return (coe[currTeamNum].size() != 0);
     }
@@ -198,7 +198,7 @@ public class BaseballElimination {
         if (!teamIdPair.containsKey(team)) {
             throw new IllegalArgumentException("The team is not in the division!");
         }
-        getCoe(team);
+        calCoe(team);
         if (coe[teamIdPair.get(team)].size() == 0) {
             return null;
         }
@@ -220,19 +220,19 @@ public class BaseballElimination {
         //     System.out.println(division.g[3][i]);
         // }
 
-        // BaseballElimination division = new BaseballElimination("teams5.txt");
-        // for (String team : division.teams()) {
-        //     if (division.isEliminated(team)) {
-        //         StdOut.print(team + " is eliminated by the subset R = { ");
-        //         for (String t : division.certificateOfElimination(team)) {
-        //             StdOut.print(t + " ");
-        //         }
-        //         StdOut.println("}");
-        //     }
-        //     else {
-        //         StdOut.println(team + " is not eliminated");
-        //     }
-        // }
+        BaseballElimination division = new BaseballElimination("teams10.txt");
+        for (String team : division.teams()) {
+            if (division.isEliminated(team)) {
+                StdOut.print(team + " is eliminated by the subset R = { ");
+                for (String t : division.certificateOfElimination(team)) {
+                    StdOut.print(t + " ");
+                }
+                StdOut.println("}");
+            }
+            else {
+                StdOut.println(team + " is not eliminated");
+            }
+        }
 
     }
 }

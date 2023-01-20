@@ -9,6 +9,7 @@
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BaseballElimination.class" beforeDir="false" afterPath="$PROJECT_DIR$/BaseballElimination.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/BaseballElimination.java" beforeDir="false" afterPath="$PROJECT_DIR$/BaseballElimination.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/BaseballElimination.zip" beforeDir="false" afterPath="$PROJECT_DIR$/BaseballElimination.zip" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,13 +163,13 @@
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BaseballElimination.java</url>
-          <line>227</line>
-          <option name="timeStamp" value="4" />
+          <line>167</line>
+          <option name="timeStamp" value="5" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/BaseballElimination.java</url>
-          <line>169</line>
-          <option name="timeStamp" value="5" />
+          <line>222</line>
+          <option name="timeStamp" value="7" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

@@ -220,7 +220,7 @@ public class BaseballElimination {
         //     System.out.println(division.g[3][i]);
         // }
 
-        BaseballElimination division = new BaseballElimination("teams10.txt");
+        BaseballElimination division = new BaseballElimination("teams24.txt");
         for (String team : division.teams()) {
             if (division.isEliminated(team)) {
                 StdOut.print(team + " is eliminated by the subset R = { ");
